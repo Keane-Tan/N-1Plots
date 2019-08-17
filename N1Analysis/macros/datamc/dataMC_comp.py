@@ -11,29 +11,7 @@ def loop(self):
 	# set up trees or chains
 	#f = rt.TFile.Open(self.inputFileList[0])
 	#tree = f.Get(self.treeNameList[0])
-
-	# open pu histograms
-	# original pu
-	pu16 = rt.TFile.Open("puHist/PileupHistograms_0121_69p2mb_pm4p6.root")
-	pu17 = rt.TFile.Open("puHist/PileupHistograms_0328_63mb_pm5.root")
-	pu18Pre = rt.TFile.Open("puHist/PileupHistograms_0118_63mb_pm5.root")
-	pu18Post = rt.TFile.Open("puHist/PileupHistograms_0118_63mb_pm5.root")
-	puhist16 = pu16.Get("data_pu_central")
-	puhist17 = pu17.Get("data_pu_central")
-	puhist18Pre = pu18Pre.Get("data_pu_central")
-	puhist18Post = pu18Post.Get("data_pu_central")
-
-	# new pu
-	newpu16 = rt.TFile.Open("puHist/PileupHistograms_2016_69mb_pm4p6.root")
-	newpu17 = rt.TFile.Open("puHist/PileupHistograms_2017_69mb_pm5.root")
-	newpu18Pre = rt.TFile.Open("puHist/PileupHistograms_2018Pre_69mb_pm5.root")
-	newpu18Post = rt.TFile.Open("puHist/PileupHistograms_2018Post_69mb_pm5.root")
-	newpuhist16 = newpu16.Get("data_pu_central")
-	newpuhist17 = newpu17.Get("data_pu_central")
-	newpuhist18Pre = newpu18Pre.Get("data_pu_central")
-	newpuhist18Post = newpu18Post.Get("data_pu_central")
 	
-
 	tree = self.getChain(self.treeNameList[0])
 
 	# added friend tree
@@ -145,31 +123,7 @@ def loop(self):
 				continue		
 		
 		if (("Jets" in self.fileID) or ("QCD" in self.fileID)): # or ("ST1" in self.fileID)): # Bkg MC get tree weight, data and signal MC get weight == 1
-			if "16" in self.fileID:
-				puhist = puhist16
-				newpuhist = newpuhist16
-
-			elif "17" in self.fileID:
-				puhist = puhist17
-				newpuhist = newpuhist17
-
-			elif "18PRE" in self.fileID:
-				puhist = puhist18Pre
-				newpuhist = newpuhist18Pre
-
-			elif "18POST" in self.fileID:
-				puhist = puhist18Post
-				newpuhist = newpuhist18Post
-
-			w = puhist.GetBinContent(puhist.GetXaxis().FindBin(min(tree.TrueNumInteractions,puhist.GetBinLowEdge(puhist.GetNbinsX()+1))))
-			wnew = newpuhist.GetBinContent(newpuhist.GetXaxis().FindBin(min(tree.TrueNumInteractions,newpuhist.GetBinLowEdge(newpuhist.GetNbinsX()+1))))
-
-			if w != 0:
-				weight = (tree.Weight)*(tree.puWeight)*(wnew/w)
-			else:
-				weight = (tree.Weight)*(tree.puWeight)
-				print tree.puWeight
-
+			weight = (tree.Weight)*(tree.puWeight)
 		else: 
 			weight = 1.
 
