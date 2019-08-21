@@ -8,7 +8,7 @@ We are using CMSSW_9_0_0. The files shown here were modified from https://github
 Start your terminal, do kinit and ssh into cmslpc. cd into CMSSW_9_0_0, do cmsenv, and git clone the repository.
 ```
 1. voms-proxy-init --valid 192:00 -voms cms
-2. cd condor
+2. cd N-1Plots/condor
 3. python FastSubmit.py
 ```
 This will submit 222 jobs to lpc condor. It takes about a day for all the jobs to finish running. Do
