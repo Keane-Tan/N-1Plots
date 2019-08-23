@@ -85,8 +85,8 @@ def loop(self):
 			print(plotVar.split("[")[0] +" not in tree")
 
 	if (("Jets" in self.fileID) or ("QCD" in self.fileID)): # only need to do this for MC bkg
-		tree.SetBranchStatus("Weight",1)		# activate puWeight, puSysUp, puSysDown branches
-		tree.SetBranchStatus("puWeight",1)
+		tree.SetBranchStatus("Weight",1)		# activate puWeightNew, puSysUp, puSysDown branches
+		tree.SetBranchStatus("puWeightNew",1)
 
 		if "16" in self.fileID:
 			lumi = 35921.036
@@ -123,7 +123,7 @@ def loop(self):
 				continue		
 		
 		if (("Jets" in self.fileID) or ("QCD" in self.fileID)): # or ("ST1" in self.fileID)): # Bkg MC get tree weight, data and signal MC get weight == 1
-			weight = (tree.Weight)*(tree.puWeight)
+			weight = (tree.Weight)*(tree.puWeightNew)
 		else: 
 			weight = 1.
 
