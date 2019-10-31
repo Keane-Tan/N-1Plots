@@ -43,3 +43,16 @@ hadd.py - hadd all the files with the same background, say QCD16, but different 
 CopySig.py - copy the relevant signal files from the Signal directory to the year directories, so that it is straightforward to use the plotting code to make the N-1 plots.
 
 N1Plots.py - plot the N-1 plots, where each variable was plotted after the preselection cuts was applied to all other variables in the preselection. For example, if MET is plotted, all the Jet cuts, Delta Eta cut, and lepton veto are applied. See condor/N1Analysis/macros/datamc/dataMC_comp.py for detail.
+
+## Condor Troubleshooting
+To remove all jobs
+```
+condor_rm -name lpcschedd1.fnal.gov -all; condor_rm -name lpcschedd2.fnal.gov -all; condor_rm -name lpcschedd3.fnal.gov -all
+```
+You can also remove individual jobs or all jobs from just one or two schedulers. Read more on https://uscms.org/uscms_at_work/computing/setup/batch_systems.shtml#condor_monitor.
+
+To release a held job:
+```
+condor_release -name [scheduler].fnal.gov -all
+```
+For example, condor_release -name lpcschedd2.fnal.gov -all
