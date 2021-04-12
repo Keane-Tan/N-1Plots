@@ -51,7 +51,7 @@ condor_rm -name lpcschedd1.fnal.gov -all; condor_rm -name lpcschedd2.fnal.gov -a
 ```
 You can also remove individual jobs or all jobs from just one or two schedulers. Read more on https://uscms.org/uscms_at_work/computing/setup/batch_systems.shtml#condor_monitor.
 
-To release a held job:
+To release held jobs from a scheduler:
 ```
 condor_release -name [scheduler].fnal.gov -all
 ```
